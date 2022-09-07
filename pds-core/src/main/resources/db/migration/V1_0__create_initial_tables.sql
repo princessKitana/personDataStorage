@@ -1,0 +1,10 @@
+-- CREATE TABLE IF NOT EXISTS user(
+--     user_id bigserial PRIMARY KEY,
+--     personal_id varchar(200),
+--     date_of_birth date
+-- );
+--
+-- CREATE TABLE IF NOT EXISTS log(
+--      log_id bigserial PRIMARY KEY,
+--      log_data varchar(200)
+-- );

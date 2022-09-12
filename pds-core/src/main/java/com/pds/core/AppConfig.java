@@ -30,7 +30,7 @@ public class AppConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo("Person data storage REST API", "Person data storage API to perform CRUD opertations", "1.0", "Terms of service",
-                new Contact("Person data storage", "www.pds.com", "pds@pds.com"), "License of API", "API license URL", Collections.emptyList());
+                new Contact("Person data storage", "pds.com", "pds@pds.com"), "License of API", "API license URL", Collections.emptyList());
     }
 
 }

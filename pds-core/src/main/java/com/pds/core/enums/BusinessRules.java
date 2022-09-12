@@ -13,9 +13,10 @@ public enum BusinessRules {
      * 9999 Unknown
      */
     BR_3000("is mandatory"),
-    BR_3002("Invalid person number"),
-    BR_3003("Invalid birth date"),
-    BR_3004("Invalid sorting field"),
+    BR_3001("Invalid format; must be numeric in format xxxxxx-xxxxx"),
+    BR_3002("Must be less than current date"),
+    BR_3003("Invalid format; must be yyyy-mm-dd"),
+    BR_3004("Already exists"),
 
     BR_9999("Unknown");
 

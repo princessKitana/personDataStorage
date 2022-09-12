@@ -24,6 +24,8 @@ import java.util.List;
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
+    //TODO log errors
+
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @ExceptionHandler(value = {ApplicationException.class})
@@ -31,10 +33,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         log.info(new GsonBuilder().setPrettyPrinting().create().toJson(ex));
 
         ApplicationExceptionDTO appExDTO = new ApplicationExceptionDTO(ex.getErrors());
-        if (appExDTO.getErrors().stream().anyMatch(e -> e.getStatusCode().equals(BusinessRules.BR_3002.name()))) {
-            return handleExceptionInternal(ex, appExDTO,
-                    new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-        }
 
         return handleExceptionInternal(ex, appExDTO,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);

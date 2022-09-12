@@ -1,5 +1,10 @@
 package com.pds.core.util;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.Random;
 
 public final class Util {
@@ -11,6 +16,12 @@ public final class Util {
     public static int getRandomIntNumber() {
         Random random = new Random();
         return random.nextInt(1000 - 1) + 1;
+    }
+
+    public String convertObjectToJson(Object o) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(o);
+
     }
 
     public static class RandomEnum<E extends Enum<E>> {

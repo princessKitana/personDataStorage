@@ -1,7 +1,5 @@
 package com.pds.core.enums;
 
-import java.math.BigDecimal;
-
 public final class Constants {
 
     private Constants() {

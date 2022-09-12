@@ -5,10 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "users")
+@Table(name = "log")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Log {
@@ -21,8 +22,7 @@ public class Log {
     @Column(name = "log_data")
     private String logData;
 
-//    public Log(String logData) {
-//        this.logData = logData;
-//    }
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
 
 }

@@ -32,7 +32,7 @@ public class AddPersonTest extends TestHelper {
                 createAddPersonDTO("", "2000-11-21"),
                 String.class);
 
-        assertEquals(response.getStatusCode(), HttpStatus.BAD_REQUEST);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         ApplicationExceptionDTO appEx = convertToAppException(response.getBody());
         List<ApplicationError> errors = appEx.getErrors();
         assertEquals(1, errors.size());

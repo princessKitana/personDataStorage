@@ -27,22 +27,20 @@ public class GetPersonServiceImpl implements GetPersonService {
     @Override
     public List<Person> findPersonsByParams(PersonRequest request) {
         LocalDate dateOfBirth = null;
-        if(request.getDateOfBirth()!=null){
+        if (request.getDateOfBirth() != null) {
             dateOfBirth = LocalDate.parse(request.getDateOfBirth());
         }
 
         String gender = null;
-        if(request.getGender()!=null){
+        if (request.getGender() != null) {
             gender = request.getGender().name();
         }
 
-        //todo validate req
         return personRepository.findByParameters(request.getFirstName(),
                 request.getLastName(),
                 request.getPersonalId(),
                 gender,
                 dateOfBirth);
-
     }
 
 }

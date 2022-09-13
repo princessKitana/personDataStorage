@@ -1,5 +1,6 @@
 package com.pds.core.api.common.v1;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO {
 
     @ApiModelProperty(notes = "personalId", required = true, example = "210990-66399")
@@ -17,10 +19,5 @@ public class PersonDTO {
 
     @ApiModelProperty(notes = "dateOfBirth", required = true, example = "2000-09-08")
     private String dateOfBirth;
-
-    @Override
-    public String toString() {
-        return "{" + "personalId:" + this.personalId + "," + "dateOfBirth:" + this.dateOfBirth + "}";
-    }
 
 }

@@ -1,0 +1,22 @@
+<div class="col-md-6 user-container">
+  <h2 class="text-center">Add Person</h2>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="personalId">Personal ID:</label>
+      <input type="text" formControlName="personalId" placeholder="personalId" name="personalId" class="form-control"
+             id="personalId">
+    </div>
+    <br/>
+
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="text" formControlName="dateOfBirth" placeholder="dateOfBirth" name="dateOfBirth" class="form-control"
+             id="dateOfBirth">
+    </div>
+
+    <br/>
+    <button class="btn btn-success">Add</button>
+  </form>
+
+  <div class="error" >{{ error }}</div>
+</div>

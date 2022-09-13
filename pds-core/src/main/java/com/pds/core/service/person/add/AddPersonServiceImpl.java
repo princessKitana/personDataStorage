@@ -1,6 +1,5 @@
 package com.pds.core.service.person.add;
 
-
 import com.pds.core.domain.Person;
 import com.pds.core.enums.Gender;
 import com.pds.core.repository.PersonRepository;
@@ -25,7 +24,7 @@ import java.util.Objects;
 @Component
 public class AddPersonServiceImpl implements AddPersonService {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private PersonRepository personRepository;
@@ -60,14 +59,18 @@ public class AddPersonServiceImpl implements AddPersonService {
         response.setLastName(person.getLastName());
         response.setGender(Gender.valueOf(person.getGender()));
 
-//convertObjectToJson
-        LogRequest logRequest = new LogRequest();
-        logRequest.setTimestamp(LocalDateTime.now());
-        logRequest.setLogData(Objects.toString(person));
-        var logResponse =logService.addLog(logRequest);
-        log.info("Person added in db, log id:" + logResponse.getId());
+        logAction(person);
 
         return response;
+    }
+
+    private void logAction(Person person) {
+        var logRequest = new LogRequest();
+        logRequest.setTimestamp(LocalDateTime.now());
+        logRequest.setLogData(Objects.toString(person));
+        logRequest.setName("Person data saved in db");
+        var logResponse = logService.addLog(logRequest);
+        logger.info("Person data saved in db, log id:" + logResponse.getId());
     }
 
 }

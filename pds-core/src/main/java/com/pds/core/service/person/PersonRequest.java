@@ -1,6 +1,5 @@
 package com.pds.core.service.person;
 
-
 import com.pds.core.enums.Gender;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

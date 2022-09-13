@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum BusinessRules {
+
     /**
      * 1000-1999 Internal
      * 2000-2999 External

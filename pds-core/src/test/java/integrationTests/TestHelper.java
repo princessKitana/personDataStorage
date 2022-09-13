@@ -1,9 +1,8 @@
 package integrationTests;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.pds.core.CoreApplication;
+import com.pds.CoreApplication;
 import com.pds.core.api.common.v1.AddPersonDTO;
 import com.pds.core.api.common.v1.PersonDTO;
 import com.pds.core.api.error.v1.ApplicationExceptionDTO;
@@ -48,14 +47,6 @@ class TestHelper {
         personRepository.deleteAll();
     }
 
-
-
-    public static ResponseEntity<String> exchangePost(String url, String messageString, String port) {
-        RestTemplate restTemplate = getRestTemplate(port);
-        HttpEntity<String> entity = getEntity(messageString);
-        return restTemplate.postForEntity(url, entity, String.class);
-    }
-
     public static RestTemplate getRestTemplate(String port) {
         RestTemplate restTemplate = new RestTemplateBuilder()
                 .rootUri("http://localhost:" + port)
@@ -96,4 +87,5 @@ class TestHelper {
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
         return response;
     }
+
 }

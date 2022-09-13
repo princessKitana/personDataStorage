@@ -6,9 +6,10 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface GetPersonService{
+public interface GetPersonService {
 
     Page<Person> getAllPersons(Integer pageNo, Integer pageSize);
 
     List<Person> findPersonsByParams(PersonRequest request);
+
 }

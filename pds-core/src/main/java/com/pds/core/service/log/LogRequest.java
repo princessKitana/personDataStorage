@@ -14,4 +14,6 @@ public class LogRequest {
     private String logData;
 
     private LocalDateTime timestamp;
+
+    private String name;
 }

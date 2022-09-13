@@ -18,6 +18,9 @@ import java.util.regex.Pattern;
 
 public abstract class AbstractPersonValidator {
 
+    protected String DATE_OF_BIRTH = "dateOfBirth";
+    protected String PERSONAL_ID = "personalId";
+
     @Autowired
     private PersonRepository personRepository;
 
@@ -32,21 +35,21 @@ public abstract class AbstractPersonValidator {
 
     public Optional<ApplicationError> checkDateOfBirth(String date) {
         if (StringUtils.isBlank(date)) {
-            return ErrorUtil.createApplicationValidationError("dateOfBirth", BusinessRules.BR_3002);
+            return ErrorUtil.createApplicationValidationError(DATE_OF_BIRTH, BusinessRules.BR_3002);
         }
 
         String pattern = "^\\d{4}-\\d{2}-\\d{2}$";
         if (!Pattern.matches(pattern, date)) {
-            return ErrorUtil.createApplicationValidationError("dateOfBirth", BusinessRules.BR_3003);
+            return ErrorUtil.createApplicationValidationError(DATE_OF_BIRTH, BusinessRules.BR_3003);
         }
 
         try {
             var parsedDate = LocalDate.parse(date);
             if (parsedDate.isAfter(LocalDate.now())) {
-                return ErrorUtil.createApplicationValidationError("dateOfBirth", BusinessRules.BR_3002);
+                return ErrorUtil.createApplicationValidationError(DATE_OF_BIRTH, BusinessRules.BR_3002);
             }
         } catch (Exception e) {
-            return ErrorUtil.createApplicationValidationError("dateOfBirth", BusinessRules.BR_3003);
+            return ErrorUtil.createApplicationValidationError(DATE_OF_BIRTH, BusinessRules.BR_3003);
         }
 
         return Optional.empty();
@@ -57,7 +60,7 @@ public abstract class AbstractPersonValidator {
         if (personalId != null && Pattern.matches(pattern, personalId)) {
             return Optional.empty();
         } else {
-            return ErrorUtil.createApplicationValidationError("personalId", BusinessRules.BR_3001);
+            return ErrorUtil.createApplicationValidationError(PERSONAL_ID, BusinessRules.BR_3001);
         }
     }
 
@@ -66,7 +69,7 @@ public abstract class AbstractPersonValidator {
         if (user.isEmpty()) {
             return Optional.empty();
         } else {
-            return ErrorUtil.createApplicationValidationError("personalId", BusinessRules.BR_3004);
+            return ErrorUtil.createApplicationValidationError(PERSONAL_ID, BusinessRules.BR_3004);
         }
     }
 

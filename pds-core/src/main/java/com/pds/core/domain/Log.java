@@ -19,6 +19,10 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
+    @Lob
     @Column(name = "log_data")
     private String logData;
 

@@ -1,4 +1,4 @@
-package com.pds.core;
+package com.pds;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,13 +24,15 @@ public class AppConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.pds.core.controller"))
-                .paths(PathSelectors.any()).build().apiInfo(apiInfo());
+                .paths(PathSelectors.any())
+                .build();
+        //.apiInfo(apiInfo());
 
     }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfo("Person data storage REST API", "Person data storage API to perform CRUD opertations", "1.0", "Terms of service",
-                new Contact("Person data storage", "pds.com", "pds@pds.com"), "License of API", "API license URL", Collections.emptyList());
-    }
+//    private ApiInfo apiInfo() {
+//        return new ApiInfo("Person data storage REST API", "Person data storage API to perform CRUD opertations", "1.0", "Terms of service",
+//                new Contact("Person data storage", "/9000", "pds@pds.com"), "License of API", "API license URL", Collections.emptyList());
+//    }
 
 }

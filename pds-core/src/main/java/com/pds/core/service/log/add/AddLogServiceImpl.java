@@ -21,6 +21,7 @@ public class AddLogServiceImpl implements AddLogService {
 
         log.setLogData(request.getLogData());
         log.setTimestamp(request.getTimestamp());
+        log.setName(request.getName());
 
         logRepository.saveAndFlush(log);
 

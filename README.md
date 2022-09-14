@@ -16,7 +16,6 @@ mvn spring-boot:run
 http://localhost:8081/swagger-ui/
 
 ## Run UI:
-(On Windows, run Terminal as administrator)
 cd pds-core\src\main\resources\webapp\person-app
 ng serve
 

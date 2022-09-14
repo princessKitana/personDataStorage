@@ -1,8 +1,11 @@
 package com.pds.core.service.person.get;
 
 import com.pds.core.domain.Person;
+import com.pds.core.enums.Gender;
 import com.pds.core.repository.PersonRepository;
 import com.pds.core.service.person.PersonRequest;
+import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,19 +29,19 @@ public class GetPersonServiceImpl implements GetPersonService {
 
     @Override
     public List<Person> findPersonsByParams(PersonRequest request) {
-        LocalDate dateOfBirth = null;
-        if (request.getDateOfBirth() != null) {
-            dateOfBirth = LocalDate.parse(request.getDateOfBirth());
-        }
+        String firstName = StringUtils.isNotBlank(request.getFirstName()) ? request.getFirstName() : null;
+        String lastName = StringUtils.isNotBlank(request.getLastName()) ? request.getLastName() : null;
+        String personalId = StringUtils.isNotBlank(request.getPersonalId()) ? request.getPersonalId() : null;
+        LocalDate dateOfBirth = StringUtils.isNotBlank(request.getDateOfBirth()) ? LocalDate.parse(request.getDateOfBirth()) : null;
 
         String gender = null;
         if (request.getGender() != null) {
-            gender = request.getGender().name();
+            gender = String.valueOf(request.getGender());
         }
 
-        return personRepository.findByParameters(request.getFirstName(),
-                request.getLastName(),
-                request.getPersonalId(),
+        return personRepository.findByParameters(firstName,
+                lastName,
+                personalId,
                 gender,
                 dateOfBirth);
     }

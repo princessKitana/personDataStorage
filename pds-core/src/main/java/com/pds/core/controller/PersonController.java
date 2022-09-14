@@ -12,7 +12,10 @@ import com.pds.core.service.person.PersonRequest;
 import com.pds.core.service.person.add.AddPersonService;
 import com.pds.core.service.person.get.GetPersonService;
 import com.pds.core.util.Util;
+import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +73,7 @@ public class PersonController {
     @GetMapping(value = "/getAllPersons")
     public ResponseEntity<List<GetPersonDTO>> getAllPersonsByPage(
             @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
+            @RequestParam(defaultValue = "100") Integer pageSize) {
         Page<Person> personsPage = getPersonService.getAllPersons(pageNo, pageSize);
         var personsList = personsPage.get().collect(Collectors.toUnmodifiableList());
 
@@ -94,7 +97,11 @@ public class PersonController {
         getPersonRequest.setDateOfBirth(personDTO.getDateOfBirth());
         getPersonRequest.setFirstName(personDTO.getFirstName());
         getPersonRequest.setLastName(personDTO.getLastName());
-        getPersonRequest.setGender(personDTO.getGender());
+        Gender gender = null;
+        if (StringUtils.isNotBlank(personDTO.getGender())) {
+            gender = EnumUtils.isValidEnum(Gender.class, personDTO.getGender()) ? Gender.valueOf(personDTO.getGender()) : null;
+        }
+        getPersonRequest.setGender(gender);
         logRequest(personDTO, "/findPersonsByParams");
 
         List<Person> personsList = getPersonService.findPersonsByParams(getPersonRequest);
@@ -117,9 +124,18 @@ public class PersonController {
     }
 
     private <T> List<T> mapPersonToDTOS(List<Person> personsList) {
+
         ModelMapper modelMapper = new ModelMapper();
         Type listType = new TypeToken<List<T>>() {
         }.getType();
+
+        modelMapper.addMappings(new PropertyMap<T, Person>() {
+            @Override
+            protected void configure() {
+                skip(destination.getId());
+            }
+        });
+
         return modelMapper.map(personsList, listType);
     }
 

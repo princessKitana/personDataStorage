@@ -6,11 +6,13 @@ import {AppComponent} from './app.component';
 import {AddPersonComponent} from './person/add-person/add-person.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {GetPersonComponent} from "./person/get-person/get-person.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddPersonComponent
+    AddPersonComponent,
+    GetPersonComponent
   ],
   imports: [
     BrowserModule,

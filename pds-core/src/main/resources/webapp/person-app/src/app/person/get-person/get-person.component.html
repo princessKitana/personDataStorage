@@ -1,0 +1,85 @@
+<div class="col-md-6 user-container">
+  <h2 class="text-center">Search Person by parameter: </h2>
+
+  <style>
+    div {
+      padding: 20px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
+  <form [formGroup]="getPersonForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="personalId">Personal ID:</label>
+      <input type="text" formControlName="personalId" placeholder="210990-66111" name="personalId" class="form-control"
+             id="personalId">
+    </div>
+
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="text" formControlName="dateOfBirth" placeholder="yyyy-mm-dd" name="dateOfBirth" class="form-control"
+             id="dateOfBirth">
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">Firstname:</label>
+      <input type="text" formControlName="firstName" placeholder="John" name="firstName" class="form-control"
+             id="firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Lastname:</label>
+      <input type="text" formControlName="lastName" placeholder="Smith" name="lastName" class="form-control"
+             id="lastName">
+    </div>
+
+    <div>
+      <select formControlName="gender">
+        <option disabled>Select Gender</option>
+        <option>Select gender</option>
+        <option *ngFor="let gender of genders">{{gender}}</option>
+      </select>
+    </div>
+
+    <button>Search</button>
+  </form>
+
+  <style>
+    table, th, td {
+      border: 2px solid black;
+      border-collapse: collapse;
+      width: 50%;
+      text-align: center;
+      padding: 15px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
+  <div style="overflow-x:auto;">
+
+    <table class="table">
+      <tr *ngFor="let person of persons">
+        <td>
+          {{person.personalId}}
+        </td>
+        <td>
+          {{person.dateOfBirth}}
+        </td>
+        <td>
+          {{person.firstName}}
+        </td>
+        <td>
+          {{person.lastName}}
+        </td>
+        <td>
+          {{person.gender}}
+        </td>
+      </tr>
+    </table>
+
+    <div class="error">{{ error }}</div>
+  </div>
+</div>

@@ -3,14 +3,14 @@
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="personalId">Personal ID:</label>
-      <input type="text" formControlName="personalId" placeholder="personalId" name="personalId" class="form-control"
+      <input type="text" formControlName="personalId" placeholder="210990-66111" name="personalId" class="form-control"
              id="personalId">
     </div>
     <br/>
 
     <div class="form-group">
       <label for="dateOfBirth">Date of Birth:</label>
-      <input type="text" formControlName="dateOfBirth" placeholder="dateOfBirth" name="dateOfBirth" class="form-control"
+      <input type="text" formControlName="dateOfBirth" placeholder="yyyy-mm-dd" name="dateOfBirth" class="form-control"
              id="dateOfBirth">
     </div>
 
@@ -18,5 +18,5 @@
     <button class="btn btn-success">Add</button>
   </form>
 
-  <div class="error" >{{ error }}</div>
+  <div class="error">{{ error }}</div>
 </div>

@@ -33,6 +33,17 @@ export class AppComponent implements OnInit {
       });
   };
 
+  getPerson(): void {
+    this.router.navigate(['get-person'])
+      .then((e) => {
+        if (e) {
+          console.log("Navigation is successful!");
+        } else {
+          console.log("Navigation has failed!");
+        }
+      });
+  };
+
   ngOnInit(): void {
     this.router.events.subscribe(value => {
       this.getAllPersons();

@@ -20,6 +20,6 @@ public class GetPersonDTO extends PersonDTO {
     private String lastName;
 
     @ApiModelProperty(notes = "gender", example = "MALE")
-    private Gender gender;
+    private String gender;
 
 }

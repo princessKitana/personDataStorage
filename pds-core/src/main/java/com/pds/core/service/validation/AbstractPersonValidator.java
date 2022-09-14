@@ -8,6 +8,7 @@ import com.pds.core.service.error.ApplicationError;
 import com.pds.core.service.error.ErrorUtil;
 import com.pds.core.service.person.PersonRequest;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,10 +39,7 @@ public abstract class AbstractPersonValidator {
             return ErrorUtil.createApplicationValidationError(DATE_OF_BIRTH, BusinessRules.BR_3002);
         }
 
-        String pattern = "^\\d{4}-\\d{2}-\\d{2}$";
-        if (!Pattern.matches(pattern, date)) {
-            return ErrorUtil.createApplicationValidationError(DATE_OF_BIRTH, BusinessRules.BR_3003);
-        }
+        checkDateOfBirthPattern(date);
 
         try {
             var parsedDate = LocalDate.parse(date);
@@ -55,13 +53,25 @@ public abstract class AbstractPersonValidator {
         return Optional.empty();
     }
 
-    public Optional<ApplicationError> checkIsValidPersonalId(String personalId) {
-        String pattern = "^([0-9]{6})(-{0,1})([0-9]{5})$";
-        if (personalId != null && Pattern.matches(pattern, personalId)) {
-            return Optional.empty();
-        } else {
-            return ErrorUtil.createApplicationValidationError(PERSONAL_ID, BusinessRules.BR_3001);
+    public Optional<ApplicationError> checkDateOfBirthPattern(String date) {
+        String pattern = "^\\d{4}-\\d{2}-\\d{2}$";
+        if (StringUtils.isNotBlank(date)) {
+            if (!Pattern.matches(pattern, date)) {
+                return ErrorUtil.createApplicationValidationError(DATE_OF_BIRTH, BusinessRules.BR_3003);
+            }
         }
+        return Optional.empty();
+    }
+
+    public Optional<ApplicationError> checkIsValidPersonalId(String personalId) {
+        String pattern = "^([0-9]{6})(-)([0-9]{5})$";
+
+        if (StringUtils.isNotBlank(personalId)) {
+            if (!Pattern.matches(pattern, personalId)) {
+                return ErrorUtil.createApplicationValidationError(PERSONAL_ID, BusinessRules.BR_3001);
+            }
+        }
+        return Optional.empty();
     }
 
     public Optional<ApplicationError> checkPersonalIdPresentInDb(String personalId) {

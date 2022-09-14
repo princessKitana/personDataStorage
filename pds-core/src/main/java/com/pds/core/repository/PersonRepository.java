@@ -17,7 +17,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findByPersonalId(String personalId);
 
     @Query("select p from Person p where (:firstName is null or p.firstName = :firstName)" +
-            "and (:lastName is null or p.lastName = :firstName)" +
+            "and (:lastName is null or p.lastName = :lastName)" +
             "and (:personalId is null or p.personalId = :personalId)" +
             "and (:gender is null or p.gender = :gender)" +
             "and (:dateOfBirth is null or p.dateOfBirth = :dateOfBirth)")

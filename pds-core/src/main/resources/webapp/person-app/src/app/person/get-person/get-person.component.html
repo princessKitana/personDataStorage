@@ -36,9 +36,10 @@
     </div>
 
     <div>
+      <label>Gender:</label>
       <select formControlName="gender">
         <option disabled>Select Gender</option>
-        <option>Select gender</option>
+        <option> </option>
         <option *ngFor="let gender of genders">{{gender}}</option>
       </select>
     </div>
@@ -59,6 +60,8 @@
   </style>
 
   <div style="overflow-x:auto;">
+
+    <p class="alert alert-success">{{result}}</p>
 
     <table class="table">
       <tr *ngFor="let person of persons">
@@ -81,5 +84,6 @@
     </table>
 
     <div class="error">{{ error }}</div>
+
   </div>
 </div>
